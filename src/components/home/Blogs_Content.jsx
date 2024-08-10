@@ -28,7 +28,7 @@ function TooltipIcon({ Icon, tooltipText }) {
 function Blogs_Content() {
   const content = [
     { id: 1, title: 'AI Will Take Over the World Lorem ipsum dolor sit Lorem, ipsum dolor.', description: 'Description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, nostrum. lorem ipsum dummy text is running around here', owner: 'Imran', reacts: 20, img: unknown, uploadDate: getFormattedDateAndDay(), comments: 100 },
-    { id: 2, title: 'AI Will Take Over the World', description: 'Description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, nostrum. lorem ipsum dummy text is running around here Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis, nesciunt?Lorem ipsum dolor sit.', owner: 'Imran', reacts: 20, img: unknown, uploadDate: getFormattedDateAndDay(), comments: 100 },
+    { id: 2, title: 'AI Will Take Over the World', description: 'Description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, nostrum. lorem ipsum dummy text is running around here Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis, nesciunt?Lorem ipsum dolor sit. akram udas', owner: 'Imran', reacts: 20, img: unknown, uploadDate: getFormattedDateAndDay(), comments: 100 },
     { id: 3, title: 'AI Will Take Over the World', description: 'Description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, nostrum. lorem ipsum dummy text is running around here Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis, nesciunt?Lorem ipsum dolor sit.', owner: 'Imran', reacts: 20, img: unknown, uploadDate: getFormattedDateAndDay(), comments: 100 },
     { id: 4, title: 'AI Will Take Over the World', description: 'Description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, nostrum. lorem ipsum dummy text is running around hereLorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis, nesciunt?Lorem ipsum dolor sit.', owner: 'Imran', reacts: 20, img: unknown, uploadDate: getFormattedDateAndDay(), comments: 100 },
     { id: 5, title: 'AI Will Take Over the World', description: 'Description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, nostrum. lorem ipsum dummy text is running around here', owner: 'Imran', reacts: 20, img: unknown, uploadDate: getFormattedDateAndDay(), comments: 100 },
@@ -42,35 +42,35 @@ function Blogs_Content() {
   return (
     <div>
       {content.map((cont) => (
-        <div key={cont.id} className='w-full rounded-xl shadow-lg border-none hover:shadow-2xl m-2 py-4 px-10'>
+        <div key={cont.id} className='w-full rounded-xl shadow-lg border-none hover:shadow-2xl md:m-2 my-10 py-8 px-5 md:px-10'>
           <div className='flex gap-3 items-center'>
             <div className='w-7 h-7'>
               <img src={unknown} className='border-black border-2 rounded-full w-full' alt="" />
             </div>
             <div className='text-md'>{cont.owner}</div>
           </div>
-          <div className='flex justify-between items-center'>
+          <div className='flex justify-between items-center hover:cursor-pointer'>
             <div className='flex-col'>
               <div className='text-2xl font-bold'>{cont.title}</div>
               <div className='text-md line-clamp-2'>{cont.description}</div>
             </div>
-            <div className='w-44 h-32'>
+            <div className='w-20 h-20 md:w-44 md:h-32 flex-shrink-0'>
               <img src={cont.img} alt={cont.title} className='w-full h-full object-cover' />
             </div>
           </div>
           <div className='flex justify-between'>
-            <div className='flex gap-10'>
+            <div className='flex gap-4 md:gap-10'>
               <div>{cont.uploadDate}</div>
               <div className='flex items-center'>
-                <PiHandsClappingLight />
+                <TooltipIcon Icon={PiHandsClappingLight} tooltipText={"Reacts"} />
                 <div>{cont.reacts}</div>
               </div>
               <div className='flex items-center'>
-                <FaRegComment />
+                <TooltipIcon Icon={FaRegComment} tooltipText={"Comments"} />
                 <div>{cont.comments}</div>
               </div>
             </div>
-            <div className='flex items-center text-xl gap-6'>
+            <div className='flex items-center text-xl gap-3 md:gap-6'>
               <TooltipIcon Icon={MdOutlineDoNotDisturbOn} tooltipText="Show Less" />
               <TooltipIcon Icon={CiBookmarkPlus} tooltipText="Add to Bookmark" />
               <TooltipIcon Icon={IoIosMore} tooltipText="Show More" />

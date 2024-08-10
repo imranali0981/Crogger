@@ -10,11 +10,11 @@ function Navbar() {
   };
 
   return (
-    <nav className='w-full bg-primary text-background  shadow-md '>
+    <nav className='w-full bg-primary text-text  shadow-md '>
       <div className='container mx-auto px-4 py-3 flex justify-between items-center'>
         <div className='flex items-center space-x-6'>
-          <div className='text-3xl font-bold'>Crogger</div>
-          <div className='flex items-center space-x-2'>
+          <div className='text-3xl font-bold text-text hover:text-background hover:cursor-pointer'>Crogger</div>
+          <div className='flex items-center space-x-2 text-text hover:text-background'>
             <CiSearch className='text-2xl' />
             <input 
               type="text" 
@@ -38,18 +38,18 @@ function Navbar() {
           </div>
         </div>
         <div className='hidden md:flex items-center space-x-6 transition-transform duration-300'>
-          <a href="#" className="hover:text-secondary flex items-center space-x-2 transition duration-300">
+          <a href="#" className="text-text hover:text-background flex items-center space-x-2 transition duration-300">
             <CiCirclePlus className='text-2xl' />
             <span>Write</span>
           </a>
-          <a href="#" className="hover:text-secondary transition duration-300">
+          <a href="#" className="text-text hover:text-background transition duration-300">
             Your Blogs
           </a>
-          <a href="#" className="hover:border-secondary hover:rounded-full border-2 border-transparent transition duration-300">
+          <a href="#" className="hover:border-background hover:rounded-full border-2 border-transparent transition duration-300">
             <img 
               src={profile} 
               alt="Profile" 
-              className='rounded-full w-12 h-12 border-2 border-black'
+              className='rounded-full w-12 h-12 shadow-lg hover:shadow-xl shadow-black '
             />
           </a>
         </div>
@@ -90,7 +90,7 @@ function Navbar() {
             <span className=' items-center'>Profile</span>
         </a>
         <a href="#" className="flex gap-2 items-center hover:text-secondary transition duration-300">
-          <CiCirclePlus className=' w-8 h-8 text-2xl' />
+            <CiCirclePlus className=' w-8 h-8 text-2xl' />
             <span>Write</span>
         </a>
         <a href="#" className="block hover:text-secondary transition duration-300">
