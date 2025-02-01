@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { CiSearch, CiCirclePlus } from 'react-icons/ci';
 import profile from '../assets/profile.jpg';
 import logo from '../assets/Logo_main.svg';
-import { navigate } from 'hookrouter';
+import useNavigate from 'react-router-dom';
 
 function Navbar() {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
