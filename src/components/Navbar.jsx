@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { CiSearch, CiCirclePlus } from 'react-icons/ci';
 import profile from '../assets/profile.jpg';
+import logo from '../assets/Logo_main.svg';
+import { navigate } from 'hookrouter';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,10 +12,10 @@ function Navbar() {
   };
 
   return (
-    <nav className='w-full bg-primary text-text  shadow-md '>
+    <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-10">
       <div className='container mx-auto px-4 py-3 flex justify-between items-center'>
         <div className='flex items-center space-x-6'>
-          <div className='text-3xl font-bold text-text hover:text-background hover:cursor-pointer'>Crogger</div>
+          <div className='hover:cursor-pointer w-20 h-20'> <img src={logo} alt="here will be logo" /></div>
           <div className='flex items-center space-x-2 text-text hover:text-background'>
             <CiSearch className='text-2xl' />
             <input 
@@ -38,18 +40,18 @@ function Navbar() {
           </div>
         </div>
         <div className='hidden md:flex items-center space-x-6 transition-transform duration-300'>
-          <a href="#" className="text-text hover:text-background flex items-center space-x-2 transition duration-300">
+          <div   className="text-text hover:cursor-pointer hover:text-background flex items-center space-x-2 transition duration-300" onClick={  () => navigate("/create")} >
             <CiCirclePlus className='text-2xl' />
-            <span>Write</span>
-          </a>
+            <span>Create Blog</span>
+          </div>
           <a href="#" className="text-text hover:text-background transition duration-300">
             Your Blogs
           </a>
           <a href="#" className="hover:border-background hover:rounded-full border-2 border-transparent transition duration-300">
             <img 
-              src={profile} 
+              src='https://res.cloudinary.com/ddddij3vr/image/upload/v1737605994/profile_qnewom.jpg' 
               alt="Profile" 
-              className='rounded-full w-12 h-12 shadow-lg hover:shadow-xl shadow-black '
+              className='rounded-full w-12 h-12 shadow-lg hover:shadow-xl hover:shadow-black '
             />
           </a>
         </div>

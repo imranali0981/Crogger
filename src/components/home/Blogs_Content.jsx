@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import unknown from '../../assets/profile.jpg';
+import axios from 'axios';
 import { PiHandsClappingLight } from 'react-icons/pi';
 import { FaRegComment } from 'react-icons/fa6';
 import { MdOutlineDoNotDisturbOn } from 'react-icons/md';
@@ -26,48 +27,60 @@ function TooltipIcon({ Icon, tooltipText }) {
 }
 
 function Blogs_Content() {
-  const content = [
-    { id: 1, title: 'AI Will Take Over the World Lorem ipsum dolor sit Lorem, ipsum dolor.', description: 'Description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, nostrum. lorem ipsum dummy text is running around here', owner: 'Imran', reacts: 20, img: unknown, uploadDate: getFormattedDateAndDay(), comments: 100 },
-    { id: 2, title: 'AI Will Take Over the World', description: 'Description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, nostrum. lorem ipsum dummy text is running around here Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis, nesciunt?Lorem ipsum dolor sit. akram udas', owner: 'Imran', reacts: 20, img: unknown, uploadDate: getFormattedDateAndDay(), comments: 100 },
-    { id: 3, title: 'AI Will Take Over the World', description: 'Description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, nostrum. lorem ipsum dummy text is running around here Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis, nesciunt?Lorem ipsum dolor sit.', owner: 'Imran', reacts: 20, img: unknown, uploadDate: getFormattedDateAndDay(), comments: 100 },
-    { id: 4, title: 'AI Will Take Over the World', description: 'Description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, nostrum. lorem ipsum dummy text is running around hereLorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis, nesciunt?Lorem ipsum dolor sit.', owner: 'Imran', reacts: 20, img: unknown, uploadDate: getFormattedDateAndDay(), comments: 100 },
-    { id: 5, title: 'AI Will Take Over the World', description: 'Description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, nostrum. lorem ipsum dummy text is running around here', owner: 'Imran', reacts: 20, img: unknown, uploadDate: getFormattedDateAndDay(), comments: 100 },
-    { id: 6, title: 'AI Will Take Over the World', description: 'Description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, nostrum. lorem ipsum dummy text is running around here', owner: 'Imran', reacts: 20, img: unknown, uploadDate: getFormattedDateAndDay(), comments: 100 },
-    { id: 7, title: 'AI Will Take Over the World', description: 'Description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, nostrum. lorem ipsum dummy text is running around here', owner: 'Imran', reacts: 20, img: unknown, uploadDate: getFormattedDateAndDay(), comments: 100 },
-    { id: 8, title: 'AI Will Take Over the World', description: 'Description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, nostrum. lorem ipsum dummy text is running around here', owner: 'Imran', reacts: 20, img: unknown, uploadDate: getFormattedDateAndDay(), comments: 100 },
-    { id: 9, title: 'AI Will Take Over the World', description: 'Description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, nostrum. lorem ipsum dummy text is running around here', owner: 'Imran', reacts: 20, img: unknown, uploadDate: getFormattedDateAndDay(), comments: 100 },
-    { id: 10, title: 'AI Will Take Over the World', description: 'Description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, nostrum. lorem ipsum dummy text is running around here', owner: 'Imran', reacts: 20, img: unknown, uploadDate: getFormattedDateAndDay(), comments: 100 },
-  ];
+  const [data,setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  useEffect(()=>{
+    const fetchBlogs =  async () =>{
+      try{
+        const token = localStorage.getItem('token');
+        const resp = await axios.get('http://localhost:5000/api/blogs/',{
+          headers:{
+            'Authorization':`Bearer ${token}`
+          }
+        })
+        setData(resp.data)
+        console.log(resp.data)
+      }catch(e){
+        setError(e.message)
+      }finally{
+        setLoading(false)
+      }
+    };
+    fetchBlogs();
+  },[]);
+    if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div>
-      {content.map((cont) => (
-        <div key={cont.id} className='w-full rounded-xl shadow-lg border-none hover:shadow-2xl md:m-2 my-10 py-8 px-5 md:px-10'>
+      {data.map((cont) => (
+        <div key={cont._id} className='w-full rounded-xl shadow-lg border-none hover:shadow-2xl md:m-2 my-10 py-8 px-5 md:px-10'>
           <div className='flex gap-3 items-center'>
             <div className='w-7 h-7'>
               <img src={unknown} className='border-black border-2 rounded-full w-full' alt="" />
             </div>
-            <div className='text-md'>{cont.owner}</div>
+            <div className='text-md'>{cont.author.name}</div>
           </div>
           <div className='flex justify-between items-center hover:cursor-pointer'>
             <div className='flex-col'>
               <div className='text-2xl font-bold'>{cont.title}</div>
-              <div className='text-md line-clamp-2'>{cont.description}</div>
+              <div className='text-md line-clamp-2'>{cont.content}</div>
             </div>
             <div className='w-20 h-20 md:w-44 md:h-32 flex-shrink-0'>
-              <img src={cont.img} alt={cont.title} className='w-full h-full object-cover' />
+              <img src={unknown} alt={cont.title} className='w-full h-full object-cover' />
             </div>
           </div>
           <div className='flex justify-between'>
             <div className='flex gap-4 md:gap-10'>
-              <div>{cont.uploadDate}</div>
+              <div>{getFormattedDateAndDay(cont.createdAt)}</div>
               <div className='flex items-center'>
                 <TooltipIcon Icon={PiHandsClappingLight} tooltipText={"Reacts"} />
-                <div>{cont.reacts}</div>
+                <div>{cont.like}</div>
               </div>
               <div className='flex items-center'>
                 <TooltipIcon Icon={FaRegComment} tooltipText={"Comments"} />
-                <div>{cont.comments}</div>
+                <div>90</div>
               </div>
             </div>
             <div className='flex items-center text-xl gap-3 md:gap-6'>
