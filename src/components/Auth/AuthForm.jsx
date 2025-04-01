@@ -69,6 +69,7 @@ function Login() {
       const params = new URLSearchParams(window.location.search);
       const token = params.get('token');
       if(token){
+        console.log("Token is here: ",token);
         clearInterval(checkForToken);
         localStorage.setItem('jwtToken',token);
         navigate('/', {state: {lginSuccess: true}});
@@ -171,7 +172,7 @@ function Login() {
               <input type="submit" value="Signup" />
             </div>
             <div 
-              className="flex items-center justify-center p-3 m-4 border border-gray-300 font-sans rounded-[15px] hover:bg-black hover:text-white transition duration-300 ease-in-out cursor-pointer font-semibold text-gray-500"
+              className="flex items-center justify-center p-3 m-4 border border-gray-300 font-sans rounded-[15px] hover:bg-black hover:text-white transition duration-300 ease-in-out hover:cursor-pointer font-semibold text-gray-500"
               onClick={handleGoogleLogin}
             >
               <label className="flex items-center space-x-2">

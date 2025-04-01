@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AuthForm from "./components/Auth/AuthForm";
 import PrivateRoute from "./components/PrivateRoute";
 import Create from "./components/create/create";
+import GoogleAuthHandler from "./components/Auth/GoogleAuthHandler";
 
 function App() {
   return (
@@ -18,7 +19,12 @@ function App() {
               <Home />
             </PrivateRoute>
           } />
-          <Route path="/create" element={<Create />} />
+           <Route path="/auth-success" element={<GoogleAuthHandler />} />
+          <Route path="/create" element={
+            <PrivateRoute>
+              <Create />
+            </PrivateRoute>
+          } />
         </Routes>
       </Router>
     </div>

@@ -34,11 +34,7 @@ function Blogs_Content() {
     const fetchBlogs =  async () =>{
       try{
         const token = localStorage.getItem('token');
-        const resp = await axios.get('http://localhost:5000/api/blogs/',{
-          headers:{
-            'Authorization':`Bearer ${token}`
-          }
-        })
+        const resp = await axios.get('http://localhost:5000/api/blog/')
         setData(resp.data)
         console.log(resp.data)
       }catch(e){
@@ -54,7 +50,22 @@ function Blogs_Content() {
 
   return (
     <div>
-      {data.map((cont) => (
+      {data.map((blog)=>( 
+        <div key={blog._id} className='w-full rounded-xl shadow-lg border-none hover:shadow-2xl md:m-2 my-10 py-8 px-5 md:px-10'>
+          <div className=' flex gap-3 items-center'>
+            {/* <div className=' w-7 h-7'> here will be image</div> */}
+            <div className=' text-md'> 
+              {blog.authorId.username}
+            </div>
+          </div>
+          <div className=' flex justify-between items-center hover:cursor-pointer'>
+            <div className=' flex-col'>
+              <div className=' text-2xl font-bold'> { blog.title } </div>
+              <div className=' text-md line-clamp-2'> { blog.content } </div>
+            </div>
+          </div>
+        </div>))}
+      {/* {data.map((cont) => (
         <div key={cont._id} className='w-full rounded-xl shadow-lg border-none hover:shadow-2xl md:m-2 my-10 py-8 px-5 md:px-10'>
           <div className='flex gap-3 items-center'>
             <div className='w-7 h-7'>
@@ -90,7 +101,8 @@ function Blogs_Content() {
             </div>
           </div>
         </div>
-      ))}
+      ))} */}
+      {/* <h2>Hello Here II am</h2> */}
     </div>
   );
 }

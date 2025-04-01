@@ -11,7 +11,7 @@ function RecommendSection() {
     const fetchBlock = async () => {
       try {
         const token = localStorage.getItem('token');
-        const resp = await axios.get("http://localhost:5000/api/blogs/", {
+        const resp = await axios.get("http://localhost:5000/api/blog/", {
           headers: {
             'Authorization': `Bearer ${token}`
           }
